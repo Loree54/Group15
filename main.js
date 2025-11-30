@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
             form.style.display = 'none';
             successMessage.style.display = 'block';
             
-            // In a real application, you would send the data to a server here
+            // 
             console.log('Form submitted successfully!');
             console.log('Name:', nameInput.value);
             console.log('Email:', emailInput.value);
