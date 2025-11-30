@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
     
+    // Track if form has been attempted to submit
+    let formSubmitted = false;
+    
     // Theme toggle functionality
     themeToggle.addEventListener('click', function() {
         document.body.classList.toggle('dark-theme');
@@ -29,25 +32,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Real-time validation for name
+    // Real-time validation for name (only show errors after form submission attempt)
     nameInput.addEventListener('blur', function() {
-        validateName();
+        if (formSubmitted) {
+            validateName();
+        }
     });
     
-    // Real-time validation for email
+    // Real-time validation for email (only show errors after form submission attempt)
     emailInput.addEventListener('blur', function() {
-        validateEmail();
+        if (formSubmitted) {
+            validateEmail();
+        }
     });
     
-    // Real-time password strength and validation
+    // Real-time password strength and validation (only show errors after form submission attempt)
     passwordInput.addEventListener('input', function() {
-        validatePassword();
         updatePasswordStrength();
+        if (formSubmitted) {
+            validatePassword();
+        }
     });
     
     // Form submission
     form.addEventListener('submit', function(e) {
         e.preventDefault();
+        
+        // Set form as submitted to show errors
+        formSubmitted = true;
         
         const isNameValid = validateName();
         const isEmailValid = validateEmail();
@@ -58,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
             form.style.display = 'none';
             successMessage.style.display = 'block';
             
-            // 
+            // In a real application, you would send the data to a server here
             console.log('Form submitted successfully!');
             console.log('Name:', nameInput.value);
             console.log('Email:', emailInput.value);
@@ -71,21 +83,22 @@ document.addEventListener('DOMContentLoaded', function() {
         form.reset();
         form.style.display = 'block';
         successMessage.style.display = 'none';
+        formSubmitted = false;
         
         // Reset error messages
-        nameError.style.display = 'none';
-        emailError.style.display = 'none';
-        passwordError.style.display = 'none';
+        nameError.classList.remove('show');
+        emailError.classList.remove('show');
+        passwordError.classList.remove('show');
         passwordStrength.className = 'password-strength-bar';
     });
     
     // Validation functions
     function validateName() {
         if (nameInput.value.trim() === '') {
-            nameError.style.display = 'flex';
+            nameError.classList.add('show');
             return false;
         } else {
-            nameError.style.display = 'none';
+            nameError.classList.remove('show');
             return true;
         }
     }
@@ -93,10 +106,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateEmail() {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(emailInput.value.trim())) {
-            emailError.style.display = 'flex';
+            emailError.classList.add('show');
             return false;
         } else {
-            emailError.style.display = 'none';
+            emailError.classList.remove('show');
             return true;
         }
     }
@@ -108,10 +121,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const hasMinLength = password.length >= 8;
         
         if (!hasMinLength || !hasUpperCase || !hasNumber) {
-            passwordError.style.display = 'flex';
+            passwordError.classList.add('show');
             return false;
         } else {
-            passwordError.style.display = 'none';
+            passwordError.classList.remove('show');
             return true;
         }
     }
@@ -139,4 +152,9 @@ document.addEventListener('DOMContentLoaded', function() {
             passwordStrength.classList.add('strength-strong');
         }
     }
+    
+    // Initialize - hide all error messages
+    nameError.classList.remove('show');
+    emailError.classList.remove('show');
+    passwordError.classList.remove('show');
 });
