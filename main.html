@@ -1,1 +1,83 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Registration Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Create Account</h1>
+            <p>Join our community today</p>
+            <div class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </div>
+        </div>
+
+        <div class="card">
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name">
+                    </div>
+                    <div class="error-message" id="nameError">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Please enter your full name</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" placeholder="Enter your email">
+                    </div>
+                    <div class="error-message" id="emailError">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Please enter a valid email address</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" placeholder="Create a strong password">
+                    </div>
+                    <div class="password-strength">
+                        <div class="password-strength-bar" id="passwordStrength"></div>
+                    </div>
+                    <div class="error-message" id="passwordError">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Password must contain at least 8 characters, one uppercase letter and one number</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">Create Account</button>
+            </form>
+
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Registration Successful!</h2>
+                <p>Thank you for joining our community. We've sent a confirmation email to your inbox.</p>
+                <button class="btn" id="resetForm">Create Another Account</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Already have an account? <a href="#">Sign In</a></p>
+            <p>&copy; 2023 Omondi Ake. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+          </html>
